@@ -1,0 +1,6 @@
+name: Development
+version: 1.0.0
+summary: Development environment
+description: Deploys a development environment
+runner: ARM
+templatePath: azuredeploy.json
