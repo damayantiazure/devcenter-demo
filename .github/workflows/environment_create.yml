@@ -81,4 +81,4 @@ jobs:
             --subscription ${{ env.ENVIRONMENT_SUB }} \
             --src publish.zip
 
-            echo "- [View the deployed API](https://${{ env.ENVIRONMENT_NAME }}.azurewebsites.net/api/time)" >> $GITHUB_STEP_SUMMARY
+            echo "- [View the deployed app](https://${{ env.ENVIRONMENT_NAME }}-web.azurewebsites.net)" >> $GITHUB_STEP_SUMMARY
