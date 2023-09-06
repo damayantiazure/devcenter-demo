@@ -21,10 +21,10 @@ env:
 
   # branch/Pull request | Environment Type
   # --------------------------------------
-  # feature branches    | Dev
+  # feature branches    | Development
   # PR feature -> main  | Test
-  # main branch         | Prod
-  ENVIRONMENT_TYPE: ${{ github.event_name == 'push' && (github.event.ref == 'refs/heads/main' && 'Prod' || 'Dev') || github.event_name == 'pull_request' && (github.event.pull_request.base.ref == 'main' && 'Test') || 'Dev' }}
+  # main branch         | Production
+  ENVIRONMENT_TYPE: ${{ github.event_name == 'push' && (github.event.ref == 'refs/heads/main' && 'Production' || 'Development') || github.event_name == 'pull_request' && (github.event.pull_request.base.ref == 'main' && 'Test') || 'Development' }}
 
 jobs:
   env_config:
@@ -44,8 +44,8 @@ jobs:
 
           environment_type = '${{ env.ENVIRONMENT_TYPE }}'
 
-          if environment_type not in ['Dev', 'Test', 'Prod']:
-              print(f'::error title=Invalid environment type: {environment_type}::Please set the environment to one of Dev, Test, or Prod.')
+          if environment_type not in ['Development', 'Test', 'Production']:
+              print(f'::error title=Invalid environment type: {environment_type}::Please set the environment to one of Development, Test, or Production.')
               exit(1)
 
           required_vars = {
