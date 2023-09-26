@@ -1,5 +1,4 @@
 name: Delete Environment tmp
-name: Delete Environment
 
 permissions:
   id-token: write
