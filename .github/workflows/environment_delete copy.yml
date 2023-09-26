@@ -10,6 +10,7 @@ on:
 jobs:
   
   delete_env:
+    runs-on: ubuntu-latest
     environment: Production
     steps:
       - name: Install DevCenter CLI Extension
@@ -24,5 +25,4 @@ jobs:
 
       - name: Delete Environment
         run: |
-          az devcenter dev environment delete --name ${{ env.ENVIRONMENT_NAME }} \
-              --dev-center ${{ vars.AZURE_DEVCENTER }} --project ${{ vars.AZURE_PROJECT }} --yes
+           az devcenter dev environment delete --environment-name ci-branch-main-682042278 --project devcenter-demo --dev-center-name azh-devcenter --yes
