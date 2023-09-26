@@ -59,7 +59,7 @@ jobs:
 
           if [ $? -ne 0 ]; then
               # Prod (main) environment may not be created yet
-              if [[ $environment_rg =~ "EnvironmentCannotBeFound" || $environment_rg =~ "EnvironmentNotFound" ]] && [[ "$ENVIRONMENT_TYPE" == "Prod" ]]; then
+              if [[ $environment_rg =~ "EnvironmentCannotBeFound" || $environment_rg =~ "EnvironmentNotFound" ]] && [[ "$ENVIRONMENT_TYPE" == "Production" ]]; then
                   echo "Environment ${{ env.ENVIRONMENT_NAME }} not found, creating..."
 
                   environment_rg=$(az devcenter dev environment create \
