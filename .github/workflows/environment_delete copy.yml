@@ -1,4 +1,5 @@
 name: Delete Environment tmp
+name: Delete Environment
 
 permissions:
   id-token: write
@@ -6,20 +7,25 @@ permissions:
 on:
   workflow_dispatch
 
+concurrency: ${{ github.event.number || github.ref_name }}
 
 jobs:
-  
+  config:
+    if: github.event_name == 'pull_request' || github.event.ref_type == 'branch'
+    name: Get Configuration
+    uses: ./.github/workflows/environment_config.yml
+
   delete_env:
-   
+    if: github.event_name == 'pull_request' || github.event.ref_type == 'branch'
+    name: Delete ${{ needs.config.outputs.type }} Environment
     runs-on: ubuntu-latest
+
     needs: config
     environment: ${{ needs.config.outputs.type }}
 
     env:
       ENVIRONMENT_NAME: ${{ needs.config.outputs.name }}
       ENVIRONMENT_TYPE: ${{ needs.config.outputs.type }}
-    
-    
 
     steps:
       - name: Install DevCenter CLI Extension
@@ -34,4 +40,5 @@ jobs:
 
       - name: Delete Environment
         run: |
-          az devcenter dev environment delete --environment-name ci-branch-main-682042278 --project devcenter-demo --dev-center-name azh-devcenter --yes
+          az devcenter dev environment delete --name ${{ env.ENVIRONMENT_NAME }} \
+              --dev-center ${{ vars.AZURE_DEVCENTER }} --project ${{ vars.AZURE_PROJECT }} --yes
