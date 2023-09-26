@@ -12,7 +12,12 @@ jobs:
   delete_env:
    
     runs-on: ubuntu-latest
+    needs: config
+    environment: ${{ needs.config.outputs.type }}
 
+    env:
+      ENVIRONMENT_NAME: ${{ needs.config.outputs.name }}
+      ENVIRONMENT_TYPE: ${{ needs.config.outputs.type }}
     
     
 
