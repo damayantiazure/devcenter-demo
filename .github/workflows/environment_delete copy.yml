@@ -6,25 +6,15 @@ permissions:
 on:
   workflow_dispatch
 
-concurrency: ${{ github.event.number || github.ref_name }}
 
 jobs:
-  config:
-    if: github.event_name == 'pull_request' || github.event.ref_type == 'branch'
-    name: Get Configuration
-    uses: ./.github/workflows/environment_config.yml
-
+  
   delete_env:
-    if: github.event_name == 'pull_request' || github.event.ref_type == 'branch'
-    name: Delete ${{ needs.config.outputs.type }} Environment
+   
     runs-on: ubuntu-latest
 
-    needs: config
-    environment: ${{ needs.config.outputs.type }}
-
-    env:
-      ENVIRONMENT_NAME: ${{ needs.config.outputs.name }}
-      ENVIRONMENT_TYPE: ${{ needs.config.outputs.type }}
+    
+    
 
     steps:
       - name: Install DevCenter CLI Extension
