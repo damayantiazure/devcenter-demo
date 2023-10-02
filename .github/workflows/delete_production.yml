@@ -1,4 +1,4 @@
-name: Delete Environment
+name: Delete Production Environment
 
 permissions:
   id-token: write
