@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
+// Licensed under the MIT License..
+
 
 @description('Name of the Web App')
 param name string = ''
